@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Website</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #5FC9A4;
+            --secondary-color: #5AA1C4;
+            --highlight-color: #4AF7CC;
+            --bg-color: #FAFEFD;
+            --text-color: #333333;
+            --section-bg: #FFFFFF;
+            --nav-bg: rgba(250, 254, 253, 0.9);
+            --border-color: #e0e0e0;
+            --nav-height: 70px;
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #5FC9A4;
+            --secondary-color: #5AA1C4;
+            --highlight-color: #4AF7CC;
+            --bg-color: #010813;
+            --text-color: #E6F1FF;
+            --section-bg: #010813;
+            --nav-bg: #071935;
+            --border-color: #233554;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body {
+            font-family: 'Noto Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            height: 100vh;
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        section {
+            width: 100%;
+            height: 100vh;
+            padding: calc(var(--nav-height) + 20px) 8% 60px;
+            scroll-snap-align: start;
+            background-color: var(--section-bg);
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Homepage specific styles */
+        #home {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('../images/LatvijasUniversitāte.png') no-repeat center bottom;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0;
+        }
+        #home .hero-content {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 40px;
+            border-radius: 10px;
+            max-width: 800px;
+            margin: 0 20px;
+        }
+
+        #home h1 {
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        #home p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+
+        #home .hero-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #home .hero-btn:hover {
+            background-color: var(--highlight-color);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Section content layouts */
+        .section-content {
+            display: flex;
+            height: 100%;
+            align-items: center;
+            gap: 40px;
+        }
+
+        /* Odd sections (1, 3, 5) - image on left */
+        #section1 .section-content,
+        #section3 .section-content,
+        #section5 .section-content {
+            flex-direction: row;
+        }
+
+        /* Even sections (2, 4) - image on right */
+        #section2 .section-content,
+        #section4 .section-content {
+            flex-direction: row-reverse;
+        }
+
+        .image-container {
+            flex: 1;
+            height: 80%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 100%;
+            background-color: rgba(90, 161, 196, 0.1);
+            border: 2px solid var(--secondary-color);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary-color);
+            background-size: cover;
+            background-position: center;
+        }
+
+        #section1 .image-placeholder {
+            background-image: url('../images/BVĢ_biblioteka.jpeg');
+        }
+
+        #section2 .image-placeholder {
+            background-image: url('../images/EklaseUzdevumilv.png');
+        }
+        #section3 .image-container {
+            position: relative;
+            overflow: hidden;
+        }
+        #section3 .image-placeholder {
+            background-image: url('../images/LU.png');
+            background-size: contain;  /* Changed from 'cover' to 'contain' */
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 100%;
+            height: 100%;
+            border: none;  /* Remove the dashed border */
+            background-color: transparent;  /* Remove the colored background */
+        }
+
+        #section4 .image-placeholder {
+            background-image: url('../images/Internets.jpg');
+        }
+
+        /* Section 5 - Two Logo Layout */
+#section5 .image-container {
+    display: flex;
+    gap: 30px; /* Space between logos */
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#section5 .logo-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+#section5 .logo-image {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    max-width: 400px; /* Adjust based on your preference */
+    max-height: 300px;
+}
+
+#section5 .lu-logo {
+    background-image: url('../images/LatvijasUniversitāteLogo.png');
+    aspect-ratio: 1/1; /* Square for 595x595 */
+}
+
+#section5 .bvg-logo {
+    background-image: url('../images/BVĢ.png');
+    aspect-ratio: 1048/1370; /* Original proportions */
+}
+        .text-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .text-content::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .text-content::-webkit-scrollbar-thumb {
+            background-color: var(--secondary-color);
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            position: relative;
+            display: inline-block;
+        }
+
+
+
+        p {
+            margin-bottom: 15px;
+            max-width: 100%;
+            font-size: 0.95rem;
+        }
+
+        /* Rest of your existing styles... */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--nav-bg);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            height: var(--nav-height);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            font-size: 0.9rem;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--highlight-color);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-toggle:hover {
+            background-color: rgba(90, 161, 196, 0.1);
+        }
+
+        .next-section-btn {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .next-section-btn:hover {
+            background-color: var(--highlight-color);
+            transform: translateX(-50%) scale(1.1);
+        }
+
+        .next-section-btn i {
+            font-size: 1.3rem;
+        }
+
+        /* Mobile menu styles */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: var(--nav-height);
+            left: 0;
+            width: 100%;
+            background-color: var(--nav-bg);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            transform: translateY(-150%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .mobile-menu.active {
+            transform: translateY(0);
+        }
+
+        .mobile-menu a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(90, 161, 196, 0.2);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            section {
+                padding: calc(var(--nav-height) + 20px) 5% 60px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            #home h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-content {
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            #home h1 {
+                font-size: 2rem;
+            }
+
+            #home p {
+                font-size: 1rem;
+            }
+
+            .section-content {
+                flex-direction: column !important;
+                height: auto;
+                gap: 20px;
+            }
+
+            .image-container {
+                width: 100%;
+                height: 300px;
+                flex: none;
+            }
+
+            .text-content {
+                width: 100%;
+                flex: none;
+                padding: 0;
+            }
+
+            #home .hero-content {
+                padding: 30px;
+                margin: 0 15px;
+            }
+            #section5 .image-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+    
+            #section5 .logo-image {
+                max-width: 250px;
+                max-height: 250px;
+            }
+    
+            #section5 .bvg-logo {
+                max-height: 320px; /* Taller for vertical logo */
+            }
+        }
+
+        @media (max-width: 480px) {
+            section {
+                padding: calc(var(--nav-height) + 15px) 4% 50px;
+            }
+            
+            .logo {
+                font-size: 1.3rem;
+            }
+            
+            h1 {
+                font-size: 1.4rem;
+                margin-bottom: 15px;
+            }
+
+            #home h1 {
+                font-size: 1.8rem;
+            }
+            
+            p {
+                font-size: 0.9rem;
+            }
+            
+            .next-section-btn {
+                width: 40px;
+                height: 40px;
+                bottom: 15px;
+            }
+            
+            .next-section-btn i {
+                font-size: 1.1rem;
+            }
+
+            #home .hero-content {
+                padding: 20px;
+            }
+
+            .image-container {
+                height: 250px;
+            }
+        }
+
+        /* Prevent horizontal scrolling */
+        html, body {
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <nav>
+        <a href="#" class="logo"></a>
+        <div class="nav-links">
+            <a href="#home">Sākums</a>
+            <a href="#section1">Digitālā pieredze vidusskolā</a>
+            <a href="#section2">Vidusskolas mācību rīki</a>
+            <a href="#section3">Digitālā pieredze universitātē</a>
+            <a href="#section4">Universitātes mācību rīki</a>
+            <a href="#section5">Salīdzinājums</a>
+        </div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
+        <button class="theme-toggle" id="themeToggle">
+            <i class="fas fa-moon"></i>
+        </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#home" onclick="closeMobileMenu()">Home</a>
+        <a href="#section1" onclick="closeMobileMenu()">Digitālā pieredze vidusskolā</a>
+        <a href="#section2" onclick="closeMobileMenu()">Vidusskolas mācību rīki</a>
+        <a href="#section3" onclick="closeMobileMenu()">Digitālā pieredze universitātē</a>
+        <a href="#section4" onclick="closeMobileMenu()">Universitātes mācību rīki</a>
+        <a href="#section5" onclick="closeMobileMenu()">Salīdzinājums</a>
+    </div>
+
+    <div class="container">
+        <section id="home">
+            <div class="hero-content">
+                <h1>Manas digitālās pieredzes salīdzinājums universitātē un vidusskolā</h1>
+                <button class="hero-btn" onclick="scrollToNextSection('section1')">Digitālā pieredze vidusskolā</button>
+            </div>
+            <button class="next-section-btn" onclick="scrollToNextSection('section1')">
+                <i class="fas fa-chevron-down"></i>
+            </button>
+        </section>
+
+        <section id="section1">
+            <div class="section-content">
+                <div class="image-container">
+                    <div class="image-placeholder"></div>
+                </div>
+                <div class="text-content">
+                    <h1>Digitālā pieredze vidusskolā</h1>
+                    <p>Vidusskolā digitālie rīki mācību procesā tika izmantoti ierobežoti. Klātienē galvenokārt izmantojām mācību grāmatas, un tikai dažkārt – interaktīvas platformas kā Kahoot, lai veidotu iesaistošus testus.</p>
+                    <p>Attālināto mācību laikā digitālā pieredze paplašinājās. Stundas notika MS Teams, un uzdevumi bieži tika doti uzdevumi.lv platformā. Atzīmes un saziņa ar skolotājiem notika caur e-klasi.</p>
+                    <p>Atsevišķi skolotāji izmēģināja Moodle vidi, kas bija iepazīšanās ar to, ko vēlāk plaši pieredzēju universitātē.</p>
+                </div>
+            </div>
+            <button class="next-section-btn" onclick="scrollToNextSection('section2')">
+                <i class="fas fa-chevron-down"></i>
+            </button>
+        </section>
+
+        <section id="section2">
+            <div class="section-content">
+                <div class="image-container">
+                    <div class="image-placeholder"></div>
+                </div>
+                <div class="text-content">
+                    <h1>Vidusskolas mācību rīki</h1>
+                    <p>Galvenie rīki klātienes laikā bija e-klase un Kahoot. E-klase kalpoja kā digitālā dienasgrāmata ar atzīmēm un saziņu ar skolotājiem, taču daļa funkciju bija pieejama tikai ar maksas abonementu.</p>
+                    <p>Attālināti dominēja MS Teams, kas nodrošināja kvalitatīvas video lekcijas un grupu darbu iespējas. Papildus tika izmantots uzdevumi.lv, lai veiktu testus un iesniegtu darbus, lai gan platforma ierobežoja piekļuvi saturam bez maksas.</p>
+                    <p>Kopumā rīki bija funkcionāli, taču salīdzinoši vienkārši un bieži ar ierobežojumiem.</p>
+                </div>
+            </div>
+            <button class="next-section-btn" onclick="scrollToNextSection('section3')">
+                <i class="fas fa-chevron-down"></i>
+            </button>
+        </section>
+
+
+        <section id="section3">
+            <div class="section-content">
+                <div class="image-container">
+                    <div class="image-placeholder"></div>
+                </div>
+                <div class="text-content">
+                    <h1>Digitālā pieredze universitātē</h1>
+                    <p>Studējot universitātē, digitālās tehnoloģijas ir neatņemama studiju procesa sastāvdaļa. Lielākā daļa materiālu tiek sniegta elektroniski, un lekcijas bieži ir pieejamas gan klātienē, gan ierakstos.</p>
+                    <p>Pasniedzēji aktīvi izmanto digitālos rīkus, lai nodrošinātu piekļuvi literatūrai, pārbaudītu zināšanas ar testiem, kā arī veicinātu sadarbību starp studentiem tiešsaistē. Bieži tiek izmantoti dažādi forumi un komentāru sistēmas, lai atvieglotu komunikāciju.</p>
+                    <p>Kopumā digitālā vide universitātē ir daudz profesionālāka, strukturētāka un daudzveidīgāka nekā vidusskolā. Tā sniedz brīvību, bet vienlaikus arī prasa lielāku atbildību un pašdisciplīnu.</p>
+                </div>
+            </div>
+            <button class="next-section-btn" onclick="scrollToNextSection('section4')">
+                <i class="fas fa-chevron-down"></i>
+            </button>
+        </section>
+
+        <section id="section4">
+            <div class="section-content">
+                <div class="image-container">
+                    <div class="image-placeholder"></div>
+                </div>
+                <div class="text-content">
+                    <h1>Universitātes mācību rīki</h1>
+                    <p>Galvenais rīks, ko izmanto lekciju un materiālu pārvaldībai, ir e-studiju platforma Moodle. Tajā tiek ievietoti lekciju materiāli, uzdevumi, ieskaites un forumi diskusijām. Lietotnes uzbūve ir pārskatāma un viegli uztverama.</p>
+                    <p>Kopā ar Moodle bieži tiek izmantots arī Zoom vai MS Teams attālinātām lekcijām un konsultācijām. Šajās platformās ir iespējams veikt prezentācijas, sadalīt studentus grupās un izmantot kopīgās piezīmju iespējas.</p>
+                    <p>Dažos priekšmetos pasniedzēji apmācaīja arī specializētus rīkus kā Python, C++ vai Java, atkarībā no studiju programmas. Šie rīki padziļina izpratni par konkrētiem priekšmetiem un attīsta praktiskās iemaņas programmēšanā.</p>
+                </div>
+            </div>
+            <button class="next-section-btn" onclick="scrollToNextSection('section5')">
+                <i class="fas fa-chevron-down"></i>
+            </button>
+        </section>
+        <section id="section5">
+            <div class="section-content">
+                <div class="image-container">
+                    <div class="logo-wrapper">
+                        <div class="logo-image lu-logo"></div>
+                        </div>
+                        <div class="logo-wrapper">
+                            <div class="logo-image bvg-logo"></div>
+                        </div>
+                </div>
+                <div class="text-content">
+                    <h1>Salīdzinājums universitātes un vidusskolas rīkiem</h1>
+                    <p>Vidusskolā galvenie rīki bija e-klase un uzdevumi.lv, kuri vairāk kalpoja administratīviem un vienkāršiem uzdevumiem. To funkcionalitāte bija ierobežota, un daudz materiālu bija pieejami tikai ar maksas piekļuvi.</p>
+                    <p>Universitātē tiek izmantoti daudzpusīgāki un profesionālāki rīki kā Moodle, Zoom un dažādas nozares specifiskas programmatūras. Šie rīki ne tikai uzlabo mācību kvalitāti, bet arī sniedz reālas prasmes, kas noder profesionālajā dzīvē.</p>
+                    <p>Kopumā universitātes digitālā vide ir mērķtiecīgāka, lietotājam draudzīgāka un pielāgota studenta vajadzībām daudz plašākā mērogā.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const icon = themeToggle.querySelector('i');
+        
+        // Check for saved theme preference or use preferred color scheme
+        const currentTheme = localStorage.getItem('theme') || 
+                            (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        
+        // Apply the current theme
+        if (currentTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            icon.classList.replace('fa-moon', 'fa-sun');
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+                icon.classList.replace('fa-sun', 'fa-moon');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                icon.classList.replace('fa-moon', 'fa-sun');
+            }
+        });
+        
+        // Smooth scrolling to next section
+        function scrollToNextSection(nextSectionId) {
+            const nextSection = document.getElementById(nextSectionId);
+            if (nextSection) {
+                nextSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+        
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            // Toggle between hamburger and close icon
+            const icon = mobileMenuBtn.querySelector('i');
+            if (mobileMenu.classList.contains('active')) {
+                icon.classList.replace('fa-bars', 'fa-times');
+            } else {
+                icon.classList.replace('fa-times', 'fa-bars');
+            }
+        });
+        
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('active');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.replace('fa-times', 'fa-bars');
+        }
+        
+        // Hide next section button on last section
+        const container = document.querySelector('.container');
+        container.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const lastSection = sections[sections.length - 1];
+            const rect = lastSection.getBoundingClientRect();
+            
+            // If last section is fully in view, hide its next button
+            if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
+                const lastButton = lastSection.querySelector('.next-section-btn');
+                if (lastButton) {
+                    lastButton.style.display = 'none';
+                }
+            }
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!mobileMenu.contains(e.target) && e.target !== mobileMenuBtn) {
+                closeMobileMenu();
+            }
+        });
+        
+        // Better touch handling for mobile devices
+        document.addEventListener('touchstart', function() {}, {passive: true});
+    </script>
+</body>
+</html>
