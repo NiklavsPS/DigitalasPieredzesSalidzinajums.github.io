@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Website</title>
+    <title></title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -359,6 +359,11 @@
             font-size: 1.5rem;
             cursor: pointer;
             z-index: 1001;
+            width: 48px;  /* Increased from 36px */
+            height: 48px;
+            padding: 12px; /* Larger padding for better touch */
+            touch-action: manipulation; /* Improves touch responsiveness */
+            position: relative;
         }
 
         .mobile-menu {
@@ -536,7 +541,7 @@
     </nav>
 
     <div class="mobile-menu" id="mobileMenu">
-        <a href="#home" onclick="closeMobileMenu()">Home</a>
+        <a href="#home" onclick="closeMobileMenu()">Sākums</a>
         <a href="#section1" onclick="closeMobileMenu()">Digitālā pieredze vidusskolā</a>
         <a href="#section2" onclick="closeMobileMenu()">Vidusskolas mācību rīki</a>
         <a href="#section3" onclick="closeMobileMenu()">Digitālā pieredze universitātē</a>
