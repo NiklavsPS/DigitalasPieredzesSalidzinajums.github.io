@@ -365,7 +365,12 @@
             touch-action: manipulation; /* Improves touch responsiveness */
             position: relative;
         }
-
+        body.menu-open {
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+        }
         .mobile-menu {
             position: fixed;
             top: var(--nav-height);
@@ -676,6 +681,18 @@
                 icon.classList.replace('fa-moon', 'fa-sun');
             }
         });
+        function toggleMenu(e) {
+            e.preventDefault();
+            e.stopPropagation();
+    
+            const isOpening = !mobileMenu.classList.contains('active');
+            mobileMenu.classList.toggle('active');
+            document.body.classList.toggle('menu-open', isOpening);
+    
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        }
         
         // Smooth scrolling to next section
         function scrollToNextSection(nextSectionId) {
